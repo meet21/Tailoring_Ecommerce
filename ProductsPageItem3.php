@@ -110,8 +110,7 @@
                 </div>
                 
             </div>
-            <hr>
-            <p class="copyright">Copyright 2020 - Milan Tailor's</p>
+            <hr><a href="https://github.com/meet21"><p class="copyright">Copyright 2021 - Meet Bhalgamiya</p></a>
         </div>
     </div>
        

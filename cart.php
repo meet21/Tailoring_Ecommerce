@@ -4,14 +4,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Products-details-Milan</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">  <!--ion icons-->
-    <style type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cart page</title>
+
+<link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .btn{
+        background: blue !important;
+        border-radius: 5px !important;
+        margin: 15px !important;
+        cursor: pointer;
+        font-weight: 520;
+        letter-spacing: .5px;
+      } 
+      .btn:hover{
+        background: white !important;
+        color: blue;
+      }
         .products_container
             {
               max-width: 600px;
@@ -84,7 +108,11 @@
         align-items: center;
           }
     </style>
-</head>
+
+    
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="style.css">
+  </head>
 <body style="text-align: center;">
     
     <div class="container">
@@ -121,8 +149,8 @@
     </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=test"></script>
-<script>paypal.Buttons().render('body');</script>
+<!-- <script src="https://www.paypal.com/sdk/js?client-id=test">
+</script>-->
 </div>
 <!-- <div class="small-container cart-page">
     
@@ -281,7 +309,7 @@
 <!------- footer --------->
     
     <div class="footer">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="footer-col-1">
                     <h3>Download Our App</h3>
@@ -416,6 +444,7 @@
            // console.log("added to cart");
             cartNumbers(productsList[i]);
             totalCost(productsList[i]);
+            myFunction(productsList[i]);
  })
 }
 
@@ -492,7 +521,6 @@ function displayCart(){
            <div class="products_container">
            <div class="product-header">
            <div class="product">
-           <i class="far fa-times-circle cross"></i>
            <img style="width:40%;" src="./images/${item.tag}.jpeg">
            </div>
            <div class="text_align"><span>${item.name}</span></div>
@@ -507,6 +535,7 @@ function displayCart(){
            </div>
            </div> `
        });
+
             products_container.innerHTML += `
             <div class="basket_total">
                <h4 class="basketTotalTitle">
@@ -515,12 +544,27 @@ function displayCart(){
                 <h4 class="basketTotal">
                     $${cartCost},00
                 </h4>
-
+            </div>
+                <div class="container">
+                <button class="btn" id="Remove">Clear CartItems</button>
+                <?php echo (isset($_SESSION['username'])) ? ('<a href="checkout.php"><button class="btn">Checkout</button></a>') : ('<a href="account.php"><button class="btn">Checkout</button></a>'); ?>
+                </div>
             `
+   }
+   else{
+    products_container.innerHTML += `
+    <h3 style="margin-top:100px">Your Basket is empty </h3>    `
    }
 }
  onLoadCartNumbers();
  displayCart();
+ document.getElementById("Remove").addEventListener("click", myFunction);
+function myFunction (){
+    window.localStorage.clear();
+    location.reload();
+
+    
+}
     </script>
 </body>
 </html>
